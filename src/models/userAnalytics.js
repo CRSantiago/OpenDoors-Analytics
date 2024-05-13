@@ -1,10 +1,10 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
 
 const analyticsSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     metrics: {
@@ -12,13 +12,18 @@ const analyticsSchema = new mongoose.Schema(
       responseRate: Number,
       interviewRate: Number,
       offerRate: Number,
-      applicationStatusBreakdown: Map,
+      applicationStatusBreakdown: {
+        type: Map,
+        of: Number,
+        default: 0,
+        min: 0,
+      },
     },
   },
   { timestamps: true },
-  { collection: 'Analytics' }
+  { collection: "Analytics" }
 )
 
-const Analytics = mongoose.model('Analytics', analyticsSchema)
+const Analytics = mongoose.model("Analytics", analyticsSchema)
 
 export default Analytics
